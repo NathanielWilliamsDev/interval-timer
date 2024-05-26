@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Arial";
+}
+
+body{
+    background-color: grey;
+}
+
+.timer-controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30vh;
+    gap: 8px;
+}
+
+.timer-controls input{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+.timer-controls button{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.timer-controls button:active{
+    border: 1px solid green;
+}
+
+.timer-controls button:hover{
+    background-color: rgb(168, 223, 143);
+}
+
+.countdown{
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    color: rgb(212, 235, 202);
+}
