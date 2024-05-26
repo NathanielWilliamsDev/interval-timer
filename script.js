@@ -2,25 +2,57 @@ const input = document.querySelector(".timer-controls input");
 const button = document.querySelector(".timer-controls button");
 const countdown = document.querySelector(".countdown");
 let counter = 0;
-button.addEventListener("click", ()=>{
-    counter = input.value;
-    console.log(isCorrectTime(counter));
-    input.value = "";
+let countdownInterval;
+
+// Event listener for clicking the button
+button.addEventListener("click", (e)=>{
+    // Clear any existing interval
+    beginCountdown();
 });
 
-input.addEventListener("keydown", (e)=>{
+// Event listener for pressing "Enter" in the input box
+input.addEventListener("keypress", (e)=>{
     if(e.key === "Enter"){
-        counter = input.value;
-        if(isCorrectTime(counter)){
-            countdown.textContent = convertToSeconds(counter);
-        }
-        else{
-            console.log("Invalid input given. Please use mm:ss, and only input Numbers");
-        }
-        input.value = "";
+        beginCountdown();
     }
-});
+})
 
+
+
+
+function beginCountdown(){
+    clearInterval(countdownInterval);
+
+    // Validate and convert input
+    let timeInSeconds = -1;
+    if(isCorrectTime(input.value)){
+        timeInSeconds = convertToSeconds(input.value);
+    }
+    else{
+        return;
+    }
+
+    // Disable input and start button
+    input.disabled = true;
+    button.disabled = true;
+
+    // Display the initial time
+    countdown.textContent = timeInSeconds;
+
+    // Start the countdown
+    countdownInterval = setInterval(() => {
+        if (timeInSeconds > 0) {
+            timeInSeconds--;
+            countdown.textContent = timeInSeconds;
+        } else {
+            clearInterval(countdownInterval);
+            alert('Time is up!');
+            // Optionally, reset input and buttons
+            input.disabled = false;
+            button.disabled = false;
+        }
+    }, 1000);
+}
 
 // Checks that the time is valid
 // time will be input.value
@@ -48,3 +80,6 @@ function convertToSeconds(time){
     seconds += (Number(minutesSeconds[0])*60); // convert minutes to seconds, add it to the seconds variable
     return seconds;
 }
+
+
+
