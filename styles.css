@@ -106,8 +106,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 16px 0 8px 0;
     color: var(--timer-color);
+    margin-bottom: 8px;
 }
 
 .start-container{

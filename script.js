@@ -7,6 +7,10 @@ const timerLabel = document.querySelector(".timer-label");
 const addButton = document.querySelector(".add-button");
 const ulList = document.querySelector(".ul-list");
 
+const endingBeep = document.querySelector(".ending-beep");
+const finalBeep = document.querySelector(".final-beep");
+
+
 let countdownInterval;
 
 // array containing workout/rest objects
@@ -57,7 +61,7 @@ function startTimerSequence(timers){
             currentIndex++; // increment to the next timer
         }
         else{ // no more timer's left
-            alert("All timers completed");
+            // alert("All timers completed");
             inputTimer.disabled = false;
             startButton.disabled = false;
 
@@ -82,9 +86,13 @@ function beginCountdown(duration, label, callback){
     countdownInterval = setInterval(() => {
         if (timeInSeconds > 0) { // still time left to decrease
             timeInSeconds--; // decrease
+            if(timeInSeconds <= 2){
+                endingBeep.play();
+            }
             timerDisplay.textContent = formatTime(timeInSeconds); // update timerElement on DOM
         } 
         else { // this means timer is finished
+            finalBeep.play();
             clearInterval(countdownInterval); // stops any  existing interval to ensure no overlapping intervals
             callback(); // move to the next timer
         }
@@ -138,7 +146,7 @@ function addTimer(){
             //create new li
             let li = document.createElement("li");
             li.classList.add("li-timer");
-            li.textContent = inputLabel.value+" "+formatTime(inputTime); // set its text content
+            li.textContent = inputLabel.value; // set its text content
             ulList.appendChild(li); // append it to the ul
         }
         else{
