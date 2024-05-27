@@ -9,9 +9,6 @@ const ulList = document.querySelector(".ul-list");
 
 let countdownInterval;
 
-// workout and rest objects
-let workoutTimer = {label: "Workout", duration: 10}; //create these, put them into array, run array loop
-let restTimer = {label: "Rest", duration: 5};
 // array containing workout/rest objects
 let timerSequence = [];
 
@@ -41,9 +38,7 @@ inputTimer.addEventListener("keypress", (e)=>{
     }
 });
 
-addButton.addEventListener("click", () =>{
-    addTimer();
-});
+addButton.addEventListener("click", addTimer);
 
 // timers input is the array of timers [workout, rest]
 function startTimerSequence(timers){
@@ -52,18 +47,26 @@ function startTimerSequence(timers){
     function runNextTimer(){ //WHY NOT A LOOP?
         if(currentIndex < timers.length){ // checks if there are more timers
             let currentTimer = timers[currentIndex];
-            beginCountdown(currentTimer.duration, currentTimer.label, runNextTimer); // perform countdown on current timer
+
+            let liList = document.querySelectorAll(".ul-list li");
+            liList.forEach(li => li.classList.remove("active-timer")); // Remove active class from all list items
             
-            let liList = document.querySelectorAll("li");
-            liList[currentIndex].style.color = "#6fde8d";
+            liList[currentIndex].classList.add("active-timer");
+
+            beginCountdown(currentTimer.duration, currentTimer.label, runNextTimer); // perform countdown on current timer
             currentIndex++; // increment to the next timer
         }
         else{ // no more timer's left
             alert("All timers completed");
             inputTimer.disabled = false;
             startButton.disabled = false;
+
+            // All timer's finished, remove .active-timer from all li's
+            let liList = document.querySelectorAll(".ul-list li");
+            liList.forEach(li => li.classList.remove("active-timer"));
         }
     }
+    
     runNextTimer();
 }
 
@@ -88,7 +91,7 @@ function beginCountdown(duration, label, callback){
     }, 1000);
 }
 
-// converts seconds in 'mm:ss'
+// converts seconds into 'mm:ss'
 function formatTime(seconds) {
     let minutes = Math.floor(seconds / 60);
     let secs = seconds % 60;
@@ -114,7 +117,7 @@ function isValidTime(time){
     }
 }
 
-// Concert time parameter into seconds
+// Convert 'mm:ss' format into seconds
 function convertToSeconds(time){
     let minutesSeconds = time.split(":"); // split minutes from seconds
     let seconds = Number(minutesSeconds[1]); // store the number of seconds in a variable
@@ -134,6 +137,7 @@ function addTimer(){
             
             //create new li
             let li = document.createElement("li");
+            li.classList.add("li-timer");
             li.textContent = inputLabel.value+" "+formatTime(inputTime); // set its text content
             ulList.appendChild(li); // append it to the ul
         }

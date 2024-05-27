@@ -16,4 +16,14 @@
         - [ ] Delete the li
 
 ## Highlighting the ul
-- [ ] As the timer's execute, highlight which li item is currently counting down
+- [x] As the timer's execute, highlight which li item is currently counting down
+
+## Sets
+- Create a way for the user to choose how many sets they want to do
+    - Something involving loops I think? where the number of sets becomes the 'i' of the loop
+
+## Save workouts
+- Using local storage to save workouts
+
+## Audio cue that a timer is finishing soon
+- a beep on each of the last 3 seconds
