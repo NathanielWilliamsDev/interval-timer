@@ -1,63 +1,85 @@
 const input = document.querySelector(".timer-controls input");
 const button = document.querySelector(".timer-controls button");
-const countdown = document.querySelector(".countdown");
-let counter = 0;
+const timerDisplay = document.querySelector(".timer");
+const timerLabel = document.querySelector(".timer-label");
 let countdownInterval;
+
+// workout and rest objects
+let workoutTimer = {label: "Workout", duration: 10}; //create these, put them into array, run array loop
+let restTimer = {label: "Rest", duration: 5};
+// array containing workout/rest objects
+let timerSequence = [workoutTimer, restTimer, restTimer];
+
 
 // Event listener for clicking the button
 button.addEventListener("click", (e)=>{
     // Clear any existing interval
-    beginCountdown();
+    clearInterval(countdownInterval);
+    input.value = "" // clear the input field
+    input.disabled = true;
+    button.disabled = true;
+    startTimerSequence(timerSequence); // when clicked, startTimerSequence with the array of timers
 });
 
 // Event listener for pressing "Enter" in the input box
 input.addEventListener("keypress", (e)=>{
     if(e.key === "Enter"){
-        beginCountdown();
+        button.click();
     }
 })
 
+// timers input is the array of timers [workout, rest]
+function startTimerSequence(timers){
+    let currentIndex = 0;
 
-
-
-function beginCountdown(){
-    clearInterval(countdownInterval);
-
-    // Validate and convert input
-    let timeInSeconds = -1;
-    if(isCorrectTime(input.value)){
-        timeInSeconds = convertToSeconds(input.value);
-    }
-    else{
-        return;
-    }
-
-    // Disable input and start button
-    input.disabled = true;
-    button.disabled = true;
-
-    // Display the initial time
-    countdown.textContent = timeInSeconds;
-
-    // Start the countdown
-    countdownInterval = setInterval(() => {
-        if (timeInSeconds > 0) {
-            timeInSeconds--;
-            countdown.textContent = timeInSeconds;
-        } else {
-            clearInterval(countdownInterval);
-            alert('Time is up!');
-            // Optionally, reset input and buttons
+    function runNextTimer(){ //WHY NOT A LOOP?
+        if(currentIndex < timers.length){ // checks if there are more timers
+            let currentTimer = timers[currentIndex];
+            beginCountdown(currentTimer.duration, currentTimer.label, runNextTimer); // perform countdown on current timer
+            currentIndex++; // increment to the next timer
+        }
+        else{ // no more timer's left
+            alert("All timers completed");
             input.disabled = false;
             button.disabled = false;
         }
+    }
+    runNextTimer();
+}
+
+function beginCountdown(duration, label, callback){
+    clearInterval(countdownInterval); // clears any existing interval
+
+    // Validate and convert input
+    let timeInSeconds = duration; //currentTimer.duration
+    timerLabel.textContent = label; //currentTimer.label
+    timerDisplay.textContent = formatTime(timeInSeconds);
+
+    // Start the countdown
+    countdownInterval = setInterval(() => {
+        if (timeInSeconds > 0) { // still time left to decrease
+            timeInSeconds--; // decrease
+            timerDisplay.textContent = formatTime(timeInSeconds); // update timerElement on DOM
+        } 
+        else { // this means timer is finished
+            clearInterval(countdownInterval); // stops any  existing interval to ensure no overlapping intervals
+            alert(`${label} is done`);
+            callback(); // move to the next timer
+        }
     }, 1000);
+}
+
+// converts seconds in 'mm:ss'
+function formatTime(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
 // Checks that the time is valid
 // time will be input.value
 // returns true if the time parameter is valid, false otherwise
-function isCorrectTime(time){
+function isValidTime(time){
     if(time.length != 5){ // user is forced to use mm:ss formatting
         return(false);
     }

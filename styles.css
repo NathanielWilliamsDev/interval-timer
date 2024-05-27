@@ -38,9 +38,10 @@ body{
     background-color: rgb(168, 223, 143);
 }
 
-.countdown{
+.timer-display{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 16px;
     color: rgb(212, 235, 202);
 }
