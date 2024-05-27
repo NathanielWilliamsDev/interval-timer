@@ -1,8 +1,12 @@
-const input = document.querySelector(".timer-controls input");
+const inputTimer = document.querySelector(".input-timer");
+const inputLabel = document.querySelector(".input-label");
 const startButton = document.querySelector(".start-button");
+const resetButton = document.querySelector(".reset-button");
 const timerDisplay = document.querySelector(".timer");
 const timerLabel = document.querySelector(".timer-label");
 const addButton = document.querySelector(".add-button");
+const ulList = document.querySelector(".ul-list");
+
 let countdownInterval;
 
 // workout and rest objects
@@ -16,16 +20,24 @@ let timerSequence = [];
 startButton.addEventListener("click", (e)=>{
     // Clear any existing interval
     clearInterval(countdownInterval);
-    input.value = "" // clear the input field
-    input.disabled = true;
+    inputTimer.value = "" // clear the input field
+    inputTimer.disabled = true;
     startButton.disabled = true;
     startTimerSequence(timerSequence); // when clicked, startTimerSequence with the array of timers
 });
 
+resetButton.addEventListener("click", ()=>{
+    timerSequence = [];
+    let ulLis = document.querySelectorAll(".ul-list li");
+    for(let i = 0; i < ulLis.length; i++){
+        ulLis[i].remove();
+    }
+});
+
 // Event listener for pressing "Enter" in the input box
-input.addEventListener("keypress", (e)=>{
+inputTimer.addEventListener("keypress", (e)=>{
     if(e.key === "Enter"){
-        startButton.click();
+        addButton.click();
     }
 });
 
@@ -41,11 +53,14 @@ function startTimerSequence(timers){
         if(currentIndex < timers.length){ // checks if there are more timers
             let currentTimer = timers[currentIndex];
             beginCountdown(currentTimer.duration, currentTimer.label, runNextTimer); // perform countdown on current timer
+            
+            let liList = document.querySelectorAll("li");
+            liList[currentIndex].style.color = "#6fde8d";
             currentIndex++; // increment to the next timer
         }
         else{ // no more timer's left
             alert("All timers completed");
-            input.disabled = false;
+            inputTimer.disabled = false;
             startButton.disabled = false;
         }
     }
@@ -68,7 +83,6 @@ function beginCountdown(duration, label, callback){
         } 
         else { // this means timer is finished
             clearInterval(countdownInterval); // stops any  existing interval to ensure no overlapping intervals
-            alert(`${label} is done`);
             callback(); // move to the next timer
         }
     }, 1000);
@@ -112,9 +126,21 @@ function convertToSeconds(time){
 // Timer duration is taken from the input box when addButton is clicked
 function addTimer(){
     //if isValidTime -> convertToSeconds -> timerSequence.push({label: test, duration:inputTime})
-    if(isValidTime(input.value)){ 
-        let inputTime = convertToSeconds(input.value);
-        timerSequence.push({label:"swag", duration: inputTime});
+    if(isValidTime(inputTimer.value)){ 
+        let inputTime = convertToSeconds(inputTimer.value);
+        if(inputLabel !== ""){
+            // push the timer object to the array
+            timerSequence.push({label:inputLabel.value, duration: inputTime});
+            
+            //create new li
+            let li = document.createElement("li");
+            li.textContent = inputLabel.value+" "+formatTime(inputTime); // set its text content
+            ulList.appendChild(li); // append it to the ul
+        }
+        else{
+            alert("Please provide a valid label and time");
+        }
+        
         // NEED TO ADD ANOTHER INPUT FIELD BEFORE THE TIME ONE FOR LABEL
         // PROBABLY NEED TO PUT SOMETHING ON THE SCREEN SHOWING WHAT HAS BEEN ADDED
     }

@@ -8,18 +8,32 @@ body{
     background-color: grey;
 }
 
+.header{
+    color: rgb(225, 250, 213);
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
 .timer-controls{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30vh;
     gap: 8px;
 }
 
-.timer-controls input{
+.input-timer{
     padding: 8px;
     border-radius: 8px;
     border: none;
+    width: 12vw;
+}
+
+.input-label{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    
 }
 
 .add-button{
@@ -38,7 +52,7 @@ body{
     background-color: rgba(243, 96, 96, 0.685);
 }
 
-.start-button{
+.start-button, .reset-button{
     padding: 8px;
     border-radius: 8px;
     border: none;
@@ -54,11 +68,19 @@ body{
     background-color: rgb(168, 223, 143);
 }
 
+.reset-button:active{
+    background-color: red;
+}
+
+.reset-button:hover{
+    background-color: rgba(243, 96, 96, 0.685);
+}
+
 .timer-display{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 16px;
+    margin: 16px 0 8px 0;
     color: rgb(212, 235, 202);
 }
 
@@ -66,5 +88,33 @@ body{
     display: flex;
     justify-content: center;
     margin-top: 8px;
+    gap: 8px;
+}
 
+.timer-label{
+    font-size: 24px;
+    padding: 8px;
+}
+
+.timer{
+    font-size: 38px;
+}
+
+.ul-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.ul-list li{
+    list-style: none;
+    color: rgb(225, 250, 213);
+}
+
+.close{
+    background: none;
+    border: none;
+    color: rgb(49, 49, 49);
 }

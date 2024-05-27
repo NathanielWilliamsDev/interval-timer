@@ -8,19 +8,32 @@
 </head>
 
 <body>
+    <h1 class="header">Interval Trainer</h1>
+    <div class="timer-display">
+        <h1 class="timer">00:00</h1>
+        <h2 class="timer-label"></h2>
+        
+    </div>
+
     <div class="timer-controls">
-        <input placeholder="mm:ss">
+        <input class="input-label" placeholder="Label">
+        <input class="input-timer" placeholder="mm:ss">
         <button class="add-button">add</button>
     </div>
 
     <div class="start-container">
         <button class="start-button">Start</button>
+        <button class="reset-button">Reset</button>
     </div>
     
-    <div class="timer-display">
-        <h1 class="timer">00:00</h1>
-        <h2 class="timer-label"></h2>
-    </div>
+    <ul class="ul-list">
+        <li>Warmup 1:00</li>
+        <li>Jump 0:20</li>
+        <li>Rest 1:00</li>
+        <li>Jump 1:00</li>
+        <li>Rest 1:00</li>
+    </ul>
+    
     
 
     <script src="script.js"></script>
