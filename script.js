@@ -1,32 +1,37 @@
 const input = document.querySelector(".timer-controls input");
-const button = document.querySelector(".timer-controls button");
+const startButton = document.querySelector(".start-button");
 const timerDisplay = document.querySelector(".timer");
 const timerLabel = document.querySelector(".timer-label");
+const addButton = document.querySelector(".add-button");
 let countdownInterval;
 
 // workout and rest objects
 let workoutTimer = {label: "Workout", duration: 10}; //create these, put them into array, run array loop
 let restTimer = {label: "Rest", duration: 5};
 // array containing workout/rest objects
-let timerSequence = [workoutTimer, restTimer, restTimer];
+let timerSequence = [];
 
 
-// Event listener for clicking the button
-button.addEventListener("click", (e)=>{
+// Event listener for clicking the start button
+startButton.addEventListener("click", (e)=>{
     // Clear any existing interval
     clearInterval(countdownInterval);
     input.value = "" // clear the input field
     input.disabled = true;
-    button.disabled = true;
+    startButton.disabled = true;
     startTimerSequence(timerSequence); // when clicked, startTimerSequence with the array of timers
 });
 
 // Event listener for pressing "Enter" in the input box
 input.addEventListener("keypress", (e)=>{
     if(e.key === "Enter"){
-        button.click();
+        startButton.click();
     }
-})
+});
+
+addButton.addEventListener("click", () =>{
+    addTimer();
+});
 
 // timers input is the array of timers [workout, rest]
 function startTimerSequence(timers){
@@ -41,7 +46,7 @@ function startTimerSequence(timers){
         else{ // no more timer's left
             alert("All timers completed");
             input.disabled = false;
-            button.disabled = false;
+            startButton.disabled = false;
         }
     }
     runNextTimer();
@@ -103,5 +108,16 @@ function convertToSeconds(time){
     return seconds;
 }
 
+// Adds a timer to the timerSequence array
+// Timer duration is taken from the input box when addButton is clicked
+function addTimer(){
+    //if isValidTime -> convertToSeconds -> timerSequence.push({label: test, duration:inputTime})
+    if(isValidTime(input.value)){ 
+        let inputTime = convertToSeconds(input.value);
+        timerSequence.push({label:"swag", duration: inputTime});
+        // NEED TO ADD ANOTHER INPUT FIELD BEFORE THE TIME ONE FOR LABEL
+        // PROBABLY NEED TO PUT SOMETHING ON THE SCREEN SHOWING WHAT HAS BEEN ADDED
+    }
+}
 
 

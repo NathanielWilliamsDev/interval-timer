@@ -22,7 +22,7 @@ body{
     border: none;
 }
 
-.timer-controls button{
+.add-button{
     padding: 8px;
     border-radius: 8px;
     border: none;
@@ -30,11 +30,27 @@ body{
     border: 1px solid black;
 }
 
-.timer-controls button:active{
+.add-button:active{
+    border: 1px solid red;
+}
+
+.add-button:hover{
+    background-color: rgba(243, 96, 96, 0.685);
+}
+
+.start-button{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.start-button:active{
     border: 1px solid green;
 }
 
-.timer-controls button:hover{
+.start-button:hover{
     background-color: rgb(168, 223, 143);
 }
 
@@ -44,4 +60,11 @@ body{
     align-items: center;
     margin-top: 16px;
     color: rgb(212, 235, 202);
+}
+
+.start-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+
 }
