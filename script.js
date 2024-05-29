@@ -32,7 +32,7 @@ startButton.addEventListener("click", (e)=>{
 
 resetButton.addEventListener("click", ()=>{
     timerSequence = [];
-    let ulLis = document.querySelectorAll(".ul-list li");
+    let ulLis = document.querySelectorAll(".ul-list div");
     for(let i = 0; i < ulLis.length; i++){
         ulLis[i].remove();
     }
