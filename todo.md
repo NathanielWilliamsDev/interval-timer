@@ -36,3 +36,17 @@
     - Start in the rightmost seconds mm:s(s)
     - And as you type, be shifted across one place
         - Therefore typing '120' will show as '01:20'
+
+## Total remaining time
+- Under the timer have a 'Total Remaining: 16:34'
+
+## Pause, Play, Skip, Go Back Buttons
+- Allow the user the pause, skip, etc.
+
+## Fix the styling of li
+- [x] Make it more like the Workout Timer app
+
+## A pop up saying workout complete
+- [x] Not just an alert, but an actual HTML element that sits on top of the rest
+    - centered on the screen
+    - with an x in the top right corner to close it out

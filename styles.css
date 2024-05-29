@@ -7,9 +7,9 @@
 :root{
     --bg-color: #2c6e49;
     --timer-color: #fdc228;
-    --header-color: #161925;
+    --header-color: #eed28a;
     --input-bg-color: #4c956c;
-    --input-text-color: #fdc228;
+    --input-text-color: #eed28a;
     --button-color: #f99d21;
 }
 
@@ -17,20 +17,13 @@ body{
     background-color: var(--bg-color);
 }
 
-.img-container{
-    display: flex;
-    justify-content: center;
-}
-
-.logo{
-    width: 40vw;
-    margin-top: 20px;
-}
 
 .header{
     color: var(--header-color);
     font-size: 24px;
     padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .timer-controls{
@@ -135,20 +128,83 @@ body{
     margin-top: 8px;
 }
 
-.li-timer{
+.li-wrapper{
+    display: flex;
+    align-items: center;
+    width: 76vw;
+    justify-content: space-between;
+    background-color:var(--input-bg-color);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.li-label{
     list-style: none;
     color: rgb(225, 250, 213);
-    font-size: 22px;
+    font-size: 16px;
+}
+
+.li-time{
+    list-style: none;
+    color: rgb(255, 250, 213);
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    padding: 10px;
 }
 
 .active-timer{
     list-style: none;
-    color: rgb(57, 199, 57);
-    font-size: 32px;
+    border: 2px solid var(--timer-color);
 }
 
 .close{
     background: none;
     border: none;
     color: rgb(49, 49, 49);
+}
+
+.popup{
+    background-color: rgb(68, 139, 89);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 70vw;
+    margin: 0 auto;
+    border-radius: 18px;
+    height: 35vh;
+    color: #eed28a;
+    gap: 8px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* display: none; */
+}
+
+.popupPrimaryText{
+    margin-top: 1vh;
+    font-size: 1.5em;
+}
+
+.popupSecondaryText{
+    margin-top: 8px;
+}
+
+.popup img{
+    margin-top: 16px;
+}
+
+.popup span{
+    align-self: flex-end;
+    margin: 8px 8px 0 0;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(196, 144, 2, 0.815);
+    text-align: center;
+    color: white;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }

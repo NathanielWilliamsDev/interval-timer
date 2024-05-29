@@ -10,6 +10,9 @@ const ulList = document.querySelector(".ul-list");
 const endingBeep = document.querySelector(".ending-beep");
 const finalBeep = document.querySelector(".final-beep");
 
+const popup = document.querySelector(".popup");
+const popupClose = document.querySelector(".popup-close");
+
 
 let countdownInterval;
 
@@ -44,6 +47,10 @@ inputTimer.addEventListener("keypress", (e)=>{
 
 addButton.addEventListener("click", addTimer);
 
+popupClose.addEventListener("click", ()=>{
+    popup.style.display = "none";
+});
+
 // timers input is the array of timers [workout, rest]
 function startTimerSequence(timers){
     let currentIndex = 0;
@@ -52,7 +59,7 @@ function startTimerSequence(timers){
         if(currentIndex < timers.length){ // checks if there are more timers
             let currentTimer = timers[currentIndex];
 
-            let liList = document.querySelectorAll(".ul-list li");
+            let liList = document.querySelectorAll(".li-wrapper");
             liList.forEach(li => li.classList.remove("active-timer")); // Remove active class from all list items
             
             liList[currentIndex].classList.add("active-timer");
@@ -64,9 +71,10 @@ function startTimerSequence(timers){
             // alert("All timers completed");
             inputTimer.disabled = false;
             startButton.disabled = false;
+            showWorkoutComplete();
 
             // All timer's finished, remove .active-timer from all li's
-            let liList = document.querySelectorAll(".ul-list li");
+            let liList = document.querySelectorAll(".li-wrapper");
             liList.forEach(li => li.classList.remove("active-timer"));
         }
     }
@@ -144,18 +152,27 @@ function addTimer(){
             timerSequence.push({label:inputLabel.value, duration: inputTime});
             
             //create new li
-            let li = document.createElement("li");
-            li.classList.add("li-timer");
-            li.textContent = inputLabel.value; // set its text content
-            ulList.appendChild(li); // append it to the ul
+            let liWrapper = document.createElement("div");
+            liWrapper.classList.add("li-wrapper");
+            let liLabel = document.createElement("li");
+            liLabel.classList.add("li-label");
+            let liTime = document.createElement("li")
+            liTime.classList.add("li-time");
+            
+            liLabel.textContent = inputLabel.value; // set its text content
+            liTime.textContent = inputTimer.value;
+
+            liWrapper.appendChild(liLabel);
+            liWrapper.appendChild(liTime);
+            ulList.appendChild(liWrapper); // append it to the ul
         }
         else{
             alert("Please provide a valid label and time");
         }
-        
-        // NEED TO ADD ANOTHER INPUT FIELD BEFORE THE TIME ONE FOR LABEL
-        // PROBABLY NEED TO PUT SOMETHING ON THE SCREEN SHOWING WHAT HAS BEEN ADDED
     }
 }
 
+function showWorkoutComplete(){
+    popup.style.display = "flex";
+}
 
