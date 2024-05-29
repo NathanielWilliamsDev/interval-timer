@@ -45,6 +45,8 @@ inputTimer.addEventListener("keypress", (e)=>{
     }
 });
 
+inputTimer.addEventListener("input", formatInput);
+
 addButton.addEventListener("click", addTimer);
 
 popupClose.addEventListener("click", ()=>{
@@ -176,3 +178,16 @@ function showWorkoutComplete(){
     popup.style.display = "flex";
 }
 
+function formatInput(e){
+    let input = e.target.value.replace(/[^0-9]/g, '');
+    if(input.length > 4){
+        input = input.slice(0, 4);
+    }
+    if(input.length >= 3){
+        e.target.value = `${input.slice(0, -2)}:${input.slice(-2)}`;
+    }else if (input.length >= 2) {
+        e.target.value = `${input.slice(0, -2)}:${input.slice(-2)}`;
+    } else {
+        e.target.value = input;
+    }
+}

@@ -122,7 +122,7 @@ body{
 .timer-label{
     font-size: 24px;
     padding: 8px;
-    color: rgb(212, 235, 202);
+    color: var(--header-color);
 }
 
 .timer{
