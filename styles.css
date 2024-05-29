@@ -5,12 +5,31 @@
 }
 
 :root{
-    --bg-color: #2c6e49;
+    /* --bg-color: #2c6e49;
     --timer-color: #fdc228;
     --header-color: #eed28a;
     --input-bg-color: #4c956c;
     --input-text-color: #eed28a;
-    --button-color: #f99d21;
+    --button-color: #f99d21; */
+
+    --bg-color: #0f2730;
+    --timer-color: #37ebbe;
+    --header-color: #ffffff;
+    
+    --input-bg-color: #384652;
+    --input-placeholder-color: #ffffff;
+    --input-text-color: #37ebbe;
+
+    --add-button-bg-color: #165268;
+    --start-button-bg-color: #37ebbe;
+    --reset-button-bg-color: rgba(150, 16, 16, 0.904);
+
+    --button-text-color: #ffffff;
+    --start-button-text-color: #165268;
+
+    --popup-bg-color: #007a72f1;
+    --popup-text-color: #ffffff;
+    --popup-close-bg-color: #023436;
 }
 
 body{
@@ -39,10 +58,11 @@ body{
     border: none;
     width: 12vw;
     background-color: var(--input-bg-color);
+    color: var(--input-text-color);
 }
 
 .input-timer::placeholder, .input-label::placeholder{
-    color: var(--input-text-color);
+    color: var(--input-placeholder-color);
 }
 
 .input-label{
@@ -50,7 +70,7 @@ body{
     border-radius: 8px;
     border: none;
     background-color: var(--input-bg-color);
-    color:#013a1a;
+    color: var(--input-text-color);
 }
 
 .add-button{
@@ -59,40 +79,28 @@ body{
     border: none;
     cursor: pointer;
     border: 1px solid black;
-    background-color: var(--button-color);
+    background-color: var(--add-button-bg-color);
+    color: var(--button-text-color);
 }
 
-.add-button:active{
-    border: 1px solid red;
-}
-
-.add-button:hover{
-    background-color: rgba(243, 96, 96, 0.685);
-}
-
-.start-button, .reset-button{
+.start-button{
     padding: 8px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     border: 1px solid black;
-    background-color: var(--button-color);
+    background-color: var(--start-button-bg-color);
+    color: var(--start-button-text-color);
 }
 
-.start-button:active{
-    border: 1px solid green;
-}
-
-.start-button:hover{
-    background-color: rgb(168, 223, 143);
-}
-
-.reset-button:active{
-    background-color: red;
-}
-
-.reset-button:hover{
-    background-color: rgba(243, 96, 96, 0.685);
+.reset-button{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: var(--reset-button-bg-color);
+    color: var(--button-text-color);
 }
 
 .timer-display{
@@ -164,7 +172,7 @@ body{
 }
 
 .popup{
-    background-color: rgb(68, 139, 89);
+    background-color: var(--popup-bg-color);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -173,7 +181,7 @@ body{
     margin: 0 auto;
     border-radius: 18px;
     height: 35vh;
-    color: #eed28a;
+    color: var(--popup-text-color);
     gap: 8px;
     position: fixed;
     top: 50%;
@@ -201,9 +209,9 @@ body{
     margin: 8px 8px 0 0;
     width: 20px;
     height: 20px;
-    background-color: rgba(196, 144, 2, 0.815);
+    background-color: var(--popup-close-bg-color);
     text-align: center;
-    color: white;
+    color: var(--popup-text-color);
     border-radius: 3px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
