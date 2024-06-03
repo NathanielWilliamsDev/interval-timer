@@ -32,7 +32,7 @@
 - Have the li transition to the larger font size, and back out again
 
 ## mm:ss input field
-- Rather than having to type the colon (:), each number typed should:
+- [x] Rather than having to type the colon (:), each number typed should:
     - Start in the rightmost seconds mm:s(s)
     - And as you type, be shifted across one place
         - Therefore typing '120' will show as '01:20'
